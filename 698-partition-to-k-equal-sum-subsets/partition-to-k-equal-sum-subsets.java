@@ -3,13 +3,13 @@ class Solution {
         int sum = 0;
         for (int n : nums) sum += n;
 
-        // If total sum is not divisible by k
+        
         if (sum % k != 0) return false;
 
         int target = sum / k;
         boolean[] used = new boolean[nums.length];
 
-        // Sort descending (important for pruning)
+        
         Arrays.sort(nums);
         reverse(nums);
 
@@ -19,10 +19,9 @@ class Solution {
     private boolean backtrack(int[] nums, boolean[] used, int k,
                               int start, int currSum, int target) {
 
-        // If only one subset left, it's valid
         if (k == 1) return true;
 
-        // If current subset reaches target, move to next subset
+     
         if (currSum == target) {
             return backtrack(nums, used, k - 1, 0, 0, target);
         }
@@ -35,7 +34,7 @@ class Solution {
                 return true;
             used[i] = false;
 
-            // Pruning: if first number fails, no need to try others
+           
             if (currSum == 0) return false;
         }
 
