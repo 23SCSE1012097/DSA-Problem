@@ -1,26 +1,20 @@
-import java.util.*;
-
 class Solution {
     public int majorityElement(int[] nums) {
-        int n = nums.length;
-
-        Arrays.sort(nums);
-
-        int freq = 1;
-        int ans = nums[0];
-
-        for (int i = 1; i < n; i++) {
-            if (nums[i] == nums[i - 1]) {
-                freq++;
-            } else {
-                freq = 1;
-                ans = nums[i];
+        int count = 0;
+        int candidate = 0;
+        
+        for(int num : nums) {
+            if(count == 0) {
+                candidate = num;
             }
-
-            if (freq > n / 2) {
-                return ans;
+            
+            if(num == candidate) {
+                count++;
+            } else {
+                count--;
             }
         }
-        return ans;
+        
+        return candidate;
     }
 }
