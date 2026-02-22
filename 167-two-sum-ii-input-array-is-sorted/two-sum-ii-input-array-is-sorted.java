@@ -9,7 +9,7 @@ class Solution {
             int sum = numbers[left] + numbers[right];
             
             if (sum == target) {
-                // Problem is 1-indexed
+               
                 return new int[]{left + 1, right + 1};
             } 
             else if (sum < target) {
@@ -20,6 +20,6 @@ class Solution {
             }
         }
         
-        return new int[]{-1, -1}; // never happens (guaranteed solution)
+        return new int[]{-1, -1}; 
     }
 }
