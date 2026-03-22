@@ -16,7 +16,7 @@ class Solution {
         
         
         for (int i = -cnt01; i <= cnt10; i++) {
-    
+            
             long new01 = cnt01 + i;
             long new10 = cnt10 - i;
             
