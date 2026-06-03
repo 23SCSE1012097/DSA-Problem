@@ -8,13 +8,12 @@ class Solution {
     }
 
     private void backtrack(int index, int[] nums, List<Integer> current, List<List<Integer>> result) {
-        // हर step पर current subset add करो
         result.add(new ArrayList<>(current));
 
         for (int i = index; i < nums.length; i++) {
-            current.add(nums[i]);        // choose
+            current.add(nums[i]);       
             backtrack(i + 1, nums, current, result);
-            current.remove(current.size() - 1); // backtrack
+            current.remove(current.size() - 1); 
         }
     }
 }
