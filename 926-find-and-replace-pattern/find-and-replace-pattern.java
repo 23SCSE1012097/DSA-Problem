@@ -9,26 +9,35 @@ class Solution {
                 result.add(word);
             }
         }
+
         return result;
     }
 
     private boolean matches(String word, String pattern) {
-        Map<Character, Character> pToW = new HashMap<>();
         Map<Character, Character> wToP = new HashMap<>();
+        Map<Character, Character> pToW = new HashMap<>();
 
-        for (int i = 0; i < pattern.length(); i++) {
-            char p = pattern.charAt(i);
+        for (int i = 0; i < word.length(); i++) {
             char w = word.charAt(i);
+            char p = pattern.charAt(i);
 
-            if (pToW.containsKey(p) && pToW.get(p) != w)
-                return false;
+            if (wToP.containsKey(w)) {
+                if (wToP.get(w) != p) {
+                    return false;
+                }
+            } else {
+                wToP.put(w, p);
+            }
 
-            if (wToP.containsKey(w) && wToP.get(w) != p)
-                return false;
-
-            pToW.put(p, w);
-            wToP.put(w, p);
+            if (pToW.containsKey(p)) {
+                if (pToW.get(p) != w) {
+                    return false;
+                }
+            } else {
+                pToW.put(p, w);
+            }
         }
+
         return true;
     }
 }
