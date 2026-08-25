@@ -11,6 +11,6 @@ class Solution {
             }
         }
         
-        return new int[]{-1, -1}; // if no solution
+        return new int[]{-1, -1}; 
     }
 }
