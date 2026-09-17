@@ -1,7 +1,9 @@
+import java.util.*;
+
 class Solution {
     public int countPartitions(int[] nums, int k) {
         int n = nums.length;
-        long mod = 1_000_000_007L;
+        long MOD = 1000000007L;
 
         long[] dp = new long[n + 1];
         long[] prefix = new long[n + 1];
@@ -15,36 +17,42 @@ class Solution {
         int left = 0;
 
         for (int right = 0; right < n; right++) {
-            while (!maxDeque.isEmpty() && nums[maxDeque.peekLast()] <= nums[right]) {
+
+            while (!maxDeque.isEmpty()
+                    && nums[maxDeque.peekLast()] <= nums[right]) {
                 maxDeque.pollLast();
             }
-            maxDeque.offerLast(right);
+            maxDeque.addLast(right);
 
-            while (!minDeque.isEmpty() && nums[minDeque.peekLast()] >= nums[right]) {
+            while (!minDeque.isEmpty()
+                    && nums[minDeque.peekLast()] >= nums[right]) {
                 minDeque.pollLast();
             }
-            minDeque.offerLast(right);
+            minDeque.addLast(right);
 
-            while ((long) nums[maxDeque.peekFirst()] - nums[minDeque.peekFirst()] > k) {
+            while ((long) nums[maxDeque.peekFirst()]
+                    - nums[minDeque.peekFirst()] > k) {
+
                 if (maxDeque.peekFirst() == left) {
                     maxDeque.pollFirst();
                 }
+
                 if (minDeque.peekFirst() == left) {
                     minDeque.pollFirst();
                 }
+
                 left++;
             }
 
-            long ways;
+            dp[right + 1] = prefix[right] - (left > 0 ? prefix[left - 1] : 0);
 
-            if (left == 0) {
-                ways = prefix[right];
-            } else {
-                ways = (prefix[right] - prefix[left - 1] + mod) % mod;
+            dp[right + 1] %= MOD;
+
+            if (dp[right + 1] < 0) {
+                dp[right + 1] += MOD;
             }
 
-            dp[right + 1] = ways;
-            prefix[right + 1] = (prefix[right] + dp[right + 1]) % mod;
+            prefix[right + 1] = (prefix[right] + dp[right + 1]) % MOD;
         }
 
         return (int) dp[n];
