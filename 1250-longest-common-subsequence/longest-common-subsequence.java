@@ -3,7 +3,6 @@ class Solution {
         int m = text1.length();
         int n = text2.length();
         
-        // dp[i][j] stores the length of LCS of text1[0...i-1] and text2[0...j-1]
         int[][] dp = new int[m + 1][n + 1];
         
         for (int i = 1; i <= m; i++) {
